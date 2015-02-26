@@ -5,11 +5,16 @@
         <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     </head>
     <body>
+        <div ng-controller="StoreController as store">
+            <h1>{{ store.product.name }}</h1>
+            <h2>${{ store.product.price }}</h2>
+            <p>{{ store.product.description }}</p>
+        </div>
         <p>
             I am {{ 4 + 6 }}
         </p>
         <p>
-            {{ "Hello" + " you" }}
+            {{ "Hello" + store.product.name }}
         </p>
         <script type="text/javascript" src="bower_components/angularjs/angular.min.js"></script>
         <script type="text/javascript" src="app.js"></script>
