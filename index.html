@@ -5,10 +5,13 @@
         <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     </head>
     <body>
-        <div ng-controller="StoreController as store">
-            <h1>{{ store.product.name }}</h1>
-            <h2>${{ store.product.price }}</h2>
-            <p>{{ store.product.description }}</p>
+        <div class="list-group" ng-controller="StoreController as store">
+            <div class="list-group-item" ng-repeat="p in store.products" ng-hide="p.soldOut">
+                <h1>{{ p.name }}</h1>
+                <h2>{{ p.price | currency }}</h2>
+                <p>{{ p.description }}</p>
+                <button ng-show="p.canPurchase">Add to cart</button>
+            </div>
         </div>
         <p>
             I am {{ 4 + 6 }}
