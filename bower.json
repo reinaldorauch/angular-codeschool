@@ -1,0 +1,26 @@
+{
+  "name": "angular-codeschool",
+  "version": "0.0.1",
+  "authors": [
+    "Reinaldo A. C. Rauch <reinaldorauch@gmail.com>"
+  ],
+  "description": "Tutorial for angularjs on codeschool",
+  "main": "index.html",
+  "keywords": [
+    "angularjs",
+    "html"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angularjs": "~1.3.14",
+    "bootstrap": "~3.3.2"
+  }
+}
