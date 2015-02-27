@@ -126,9 +126,9 @@
                  * @param  {mixed}  i valor a ser testado
                  * @return {Boolean}   [description]
                  */
-                function isNumber (i) {
-                    if(!Number.isNaN(Number(i)))
-                        throw new Error('O valor deve ser numerico');
+                function isNumberOrNull (i) {
+                    if(i !== undefined && Number.isNaN(Number(i)))
+                        throw new Error('O valor deve ser numerico ou nulo');
                 }
 
                 /**
@@ -137,7 +137,7 @@
                  * @return {Number}   Numero positivo
                  */
                 function sanitizeInput (i) {
-                    isNumber(i);
+                    isNumberOrNull(i);
 
                     return Math.abs(i);
                 }
