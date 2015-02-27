@@ -122,19 +122,75 @@
                 this.max  = 100;
 
                 /**
+                 * Verifica se o input e um numero
+                 * @param  {mixed}  i valor a ser testado
+                 * @return {Boolean}   [description]
+                 */
+                function isNumber (i) {
+                    if(!Number.isNumber(i))
+                        throw new Error('O valor deve ser numerico');
+                }
+
+                /**
+                 * Sanitiza a entrada para um numero positivo
+                 * @param  {Number} i Numero a ser sanitizado
+                 * @return {Number}   Numero positivo
+                 */
+                function sanitizeInput (i) {
+                    isNumber(i);
+
+                    return Math.abs(i);
+                }
+
+                /**
+                 * Se e incremento acima do maximo
+                 * @param  {Number}  i Incremento
+                 * @return {Boolean}   Se e acima do maximo
+                 */
+                function isOverpass (i) {
+                    return (i + _this.size) > _this.max;
+                }
+
+                /**
+                 * Impede que o limite seja ultrapassado verificando se o
+                 * incremento e maior que o limite
+                 * @param  {Number} i Incremento
+                 * @return {Number}   Se for maior que o limite, retorna o
+                 *                       incremento ate ele, se nao, retorna o
+                 *                       incremento normal
+                 */
+                function getIncrementValue (i) {
+                    return isOverpass(i) ? _this.max - _this.size : i;
+                }
+
+                /**
                  * Incrementa a progressbar
                  * @param  {Null|Number} i Se vier vazio, incrementa com 1, se 
                  *                         nao, incrementa com o valor que vier
                  */
                 this.increase = function (i) {
-                    i = (i || 1);
-
-                    var isOverpass = (i + _this.size) > _this.max;
-
-                    i =  overpass ? _this.max - _this.size : i;
-
-                    _this.size += i;
+                    _this.size += getIncrementValue(sanitizeInput(i) || 1);
                 };
+
+                /**
+                 * Verifica se o decremento e inferior ao minimo
+                 * @param  {Number}  d Decremento
+                 * @return {Boolean}   Se o decremento e inferior ao minimo
+                 */
+                function isLowerpass (d) {
+                    return (_this.size - d) < _this.min;
+                }
+
+                /**
+                 * Retorna o valor do decremento, impedindo de diminuir o valor
+                 * abaixo o limite minimo
+                 * @param  {Number} d decremento
+                 * @return {Number}   Se for menor que o minimo, retorna o valor
+                 *                       atual, se nao, o decremento
+                 */
+                function getDecrementValue(d) {
+                    return isLowerpass(d) ? _this.size : d;
+                }
 
                 /**
                  * Decrementa a progressbar
@@ -142,13 +198,7 @@
                  *                         nao, decrementa com o valor passado
                  */
                 this.decrease = function (d) {
-                    d = (d || 1);
-
-                    var isLowerpass = (_this.size - i) < _this.min;
-
-                    d =  isLowerpass ? _this.size : d;
-
-                    _this.size -= d;
+                    _this.size -= getDecrementValue(sanitizeInput(d) || 1);
                 };
 
                 /**
