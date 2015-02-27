@@ -7,10 +7,12 @@
     <body ng-controller="ProgressListController as pl">
 
         <div class="container">
-            <h1>Progressbar example</h1>
+            <div class="row">
+                <h1>Progressbar example</h1>
+            </div>
 
             <div class="row" ng-repeat="l in pl.progressList">
-                <section ng-init="pr.size = l" ng-controller="ProgressController as pr">
+                <section ng-init="pr.size = l.size" ng-controller="ProgressController as pr">
                     <div class="progress" >
                         <div class="progress-bar" role="progressbar" aria-valuenow="{{ pr.size }}" aria-valuemax="100" aria-valuemin="0" style="width: {{ pr.size }}%; min-width: 5%">
                             {{ pr.size }}%
@@ -27,6 +29,16 @@
         </div>
 
         <script type="text/javascript" src="bower_components/angularjs/angular.min.js"></script>
-        <script type="text/javascript" src="app.js"></script>
+        <script>
+            var list = [];
+
+            function getRandomInteger () {
+                return Math.round(Math.random() * 10);
+            }
+
+            for (var i = 0; i < 7; i++)
+                list.push({ size: getRandomInteger() + i });
+        </script>
+        <script type="text/javascript" src="progress.js"></script>
     </body>
 </html>
