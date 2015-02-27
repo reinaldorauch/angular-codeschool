@@ -4,22 +4,25 @@
         <title>Progressbar teste</title>
         <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     </head>
-    <body>
+    <body ng-controller="ProgressListController as pl">
 
         <div class="container">
             <h1>Progressbar example</h1>
-            <div class="row" ng-controller="ProgressController as pr">
-                <div class="progress" >
-                    <div class="progress-bar" role="progressbar" aria-valuenow="{{ pr.size }}" aria-valuemax="100" aria-valuemin="0" style="width: {{ pr.size }}%; min-width: 5%">
-                        {{ pr.size }}%
+
+            <div class="row" ng-repeat="l in pl.progressList">
+                <section ng-init="pr.size = l" ng-controller="ProgressController as pr">
+                    <div class="progress" >
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ pr.size }}" aria-valuemax="100" aria-valuemin="0" style="width: {{ pr.size }}%; min-width: 5%">
+                            {{ pr.size }}%
+                        </div>
                     </div>
-                </div>
-                <p>
-                    <button ng-click="pr.increase()">Aumentar</button>
-                    <button ng-click="pr.decrease()">Decrementar</button>
-                    <button ng-click="pr.increase(10)">Aumentar +10</button>
-                    <button ng-click="pr.decrease(10)">Decrementar -10</button>
-                </p>
+                    <p>
+                        <button ng-click="pr.increase()">Aumentar</button>
+                        <button ng-click="pr.decrease()">Decrementar</button>
+                        <button ng-click="pr.increase(10)">Aumentar +10</button>
+                        <button ng-click="pr.decrease(10)">Decrementar -10</button>
+                    </p>
+                </section>
             </div>
         </div>
 
