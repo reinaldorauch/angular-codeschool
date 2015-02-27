@@ -127,7 +127,7 @@
                  * @return {Boolean}   [description]
                  */
                 function isNumber (i) {
-                    if(!Number.isNumber(i))
+                    if(!Number.isNaN(Number(i)))
                         throw new Error('O valor deve ser numerico');
                 }
 
