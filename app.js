@@ -37,18 +37,17 @@
     var progress = angular.module('progress', []);
 
     progress.controller('ProgressController', function ($interval) {
-        this.size = 1;
+        var _this = this;
+
+        _this.size = 1;
 
         this.increase = function (i) {
-            this.size = this.size < 100 ? this.size + (i || 1) : this.size;
-            console.log(this.size);
+            _this.size = _this.size < 100 ? _this.size + (i || 1) : _this.size;
         };
 
         this.decrease = function (d) {
-            this.size = this.size > 0 ? this.size - (d || 1) : this.size;
+            _this.size = _this.size > 0 ? _this.size - (d || 1) : _this.size;
         };
-
-        var _this = this;
 
         var interval = $interval(function () {
             console.log('INcreasing');
