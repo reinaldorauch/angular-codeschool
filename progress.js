@@ -105,10 +105,9 @@
                         set: function (v) {
                             // Ao setar o valor de size, atualiza o valor na lista
                             updAvg.updateList(v, _this.index);
-                            // E, se tiver o controller da lista
-                            if(_this.plc)
-                                // Atualiza a media no controller
-                                updAvg.updateAvg(_this.plc);
+                            // E, se tiver o controller da lista, Atualiza a media no controller
+                            if(_this.plc) updAvg.updateAvg(_this.plc);
+                            
                             return _size = v;
                         }
                     }
