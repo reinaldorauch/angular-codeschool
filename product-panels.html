@@ -1,0 +1,58 @@
+<section class="tab">
+    <ul class="nav nav-pills">
+        <li ng-class="{ active:panel.isSelected(1) }">
+            <a ng-click="panel.selectTab(1)" href>Description</a>
+        </li>
+        <li ng-class="{ active:panel.isSelected(2) }">
+            <a ng-click="panel.selectTab(2)" href>Specifications</a>
+        </li>
+        <li ng-class="{ active:panel.isSelected(3) }">
+            <a ng-click="panel.selectTab(3)" href>Reviews</a>
+        </li>
+    </ul>
+    <div class="panel" ng-show="panel.isSelected(1)">
+        <h4>Description</h4>
+        <p>{{ p.description }}</p>
+    </div>
+    <div class="panel" ng-show="panel.isSelected(2)">
+        <h4>Specifications</h4>
+        <blockquote>Not yet</blockquote>
+    </div>
+    <div class="panel" ng-show="panel.isSelected(3)">
+        <h4>Reviews</h4>
+        <blockquote ng-repeat="review in p.reviews">
+            <b>Stars: {{ review.stars }}</b>
+            {{ review.body }}
+            <cite>by: {{ review.author }}</cite>
+        </blockquote>
+        <form name="reviewForm" ng-controller="ReviewController as rc"
+            ng-submit="reviewForm.$valid && rc.addReview(p)" novalidate>
+            <blockquote>
+                <b>Stars: {{ rc.review.stars }}</b>
+                {{ rc.review.body }}
+                <cite>by: {{ rc.review.author }}</cite>
+            </blockquote>
+            <h4>Submit a rc.review</h4>
+            <p>
+                <select ng-model="rc.review.stars" required>
+                    <option value="1">1 star</option>
+                    <option value="2">2 stars</option>
+                    <option value="3">3 stars</option>
+                    <option value="4">4 stars</option>
+                    <option value="5">5 stars</option>
+                </select>
+            </p>
+            <p>
+                <textarea ng-model="rc.review.body" required></textarea>
+            </p>
+            <p>
+                <label>by</label>
+                <input ng-model="rc.review.author" type="email" required>
+            </p>
+            <p>reviewForm is {{reviewForm.$valid}}</p>
+            <p>
+                <input type="submit" value="Submit Review">
+            </p>
+        </form>
+    </div>
+</section>
