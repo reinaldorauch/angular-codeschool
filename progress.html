@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="progress">
+    <head>
+        <title>Progressbar teste</title>
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    </head>
+    <body ng-controller="ProgressListController as pl">
+
+        <div class="container">
+            <div class="row">
+                <h1>Progressbar example</h1>
+                <p>Average size: {{ pl.avg }}</p>
+            </div>
+
+            <div class="row" ng-repeat="l in pl.progressList">
+                <section ng-controller="ProgressController as pr" ng-init="pr.size = l.size">
+                    <p ng-init="pr.index = pl.progressList.indexOf(l)">Progress init size: {{::l.size}}</p>
+                    <div class="progress" ng-init="pr.plc = pl">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ pr.size }}" aria-valuemax="{{ pr.max }}" aria-valuemin="{{ pr.min }}" style="width: {{ pr.size }}%; min-width: 5%">
+                            {{ pr.size }}%
+                        </div>
+                    </div>
+                    <p ng-hide="pr.size === pr.max">
+                        <button ng-click="pr.increase()">Aumentar</button>
+                        <button ng-click="pr.decrease()">Decrementar</button>
+                        <button ng-click="pr.increase(10)">Aumentar +10</button>
+                        <button ng-click="pr.decrease(10)">Decrementar -10</button>
+                    </p>
+                </section>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="bower_components/angularjs/angular.min.js"></script>
+        <script>
+            var list = [];
+
+            function getRandomInteger () {
+                return Math.round(Math.random() * 10);
+            }
+
+            for (var i = 0; i < 7; i++)
+                list.push({ size: getRandomInteger() + i });
+        </script>
+        <script type="text/javascript" src="progress.js"></script>
+    </body>
+</html>

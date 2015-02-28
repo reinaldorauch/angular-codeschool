@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="store">
+    <head>
+        <title>Angular tutorial codeschool</title>
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <style>
+            .ng-invalid.ng-dirty {
+                border-color: #FA787E;
+            }
+
+            .ng-valid.ng-dirty {
+                border-color: #78FA89;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="list-group" ng-controller="StoreController as store">
+            <div class="list-group-item" ng-repeat="p in store.products" ng-hide="p.soldOut">
+                <product-title></product-title>
+                <p>{{ p.description }}</p>
+                <p><button ng-show="p.canPurchase">Add to cart</button></p>
+                <product-panels></product-panels>
+            </div>
+        </div>
+        <script type="text/javascript" src="bower_components/angularjs/angular.min.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript" src="products.js"></script>
+    </body>
+</html>
